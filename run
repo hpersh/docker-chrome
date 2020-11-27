@@ -1,0 +1,16 @@
+#!/bin/bash
+
+docker run -it \
+	--net host \
+	--cpuset-cpus 0 \
+	--memory 2g \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
+	-e DISPLAY=unix$DISPLAY \
+	-v $HOME/Downloads:/home/chrome/Downloads \
+	--security-opt seccomp=/home/hpersh/docker/chrome/chrome.json \
+	--device /dev/snd \
+	--device /dev/dri \
+	-v /dev/shm:/dev/shm \
+	--rm \
+	--name chrome \
+	chrome
